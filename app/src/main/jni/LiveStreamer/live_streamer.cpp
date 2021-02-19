@@ -9,16 +9,16 @@
 
 LiveStreamer::LiveStreamer(unsigned int fps, unsigned int port) {
     queueSize = 40;
-    fps = 25;
+    fps = fps;
     rtpPortNum = 20000;
     rtcpPortNum = rtpPortNum+1;
     ttl = 5;
-    rtspPort = 8554;
-    rtspOverHTTPPort = 0;
+    rtspPort = port;
+    rtspOverHTTPPort = 9554;
     multicast = false;
     useMmap = true;
-    url = "papan01";
-    murl = "papan01";
+    url = "unicast_stream";
+    murl = "multicast_stream";
     useThread = true;
     maddr = INADDR_NONE;
     repeatConfig = true;
@@ -44,7 +44,6 @@ void LiveStreamer::addSession(RTSPServer* rtspServer, const char* sessionName, S
     delete[] url;
 }
 
-
 bool LiveStreamer::init(){
     _scheduler 		= BasicTaskScheduler::createNew();
     _env 			= BasicUsageEnvironment::createNew(*_scheduler);
@@ -57,10 +56,10 @@ bool LiveStreamer::init(){
     }
     else
     {
-        // if (rtspOverHTTPPort)
-        // {
-        // 	_rtspServer->setUpTunnelingOverHTTP(rtspOverHTTPPort);
-        // }
+        if (rtspOverHTTPPort)
+        {
+        	_rtspServer->setUpTunnelingOverHTTP(rtspOverHTTPPort);
+        }
         _displaySource = H264_DisplayDeviceSource::createNew(*_env, queueSize, useThread, repeatConfig);
         if(_displaySource == NULL)
         {
@@ -69,7 +68,7 @@ bool LiveStreamer::init(){
         }
         else
         {
-            OutPacketBuffer::maxSize = 600000;//DisplayDeviceSource::bufferedSize;
+            OutPacketBuffer::maxSize = DisplayDeviceSource::bufferedSize;
             StreamReplicator* replicator = StreamReplicator::createNew(*_env, _displaySource, false);
             if (multicast)
             {
@@ -100,7 +99,6 @@ void LiveStreamer::loop()
 
 void LiveStreamer::dataPushed(char* data,unsigned int dataSize)
 {
-    LOGI("push  raw data\t dataSize:%d",dataSize);
     _displaySource->pushRawData(data,dataSize);
 }
 

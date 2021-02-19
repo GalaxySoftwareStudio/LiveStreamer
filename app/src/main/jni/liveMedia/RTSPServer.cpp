@@ -18,6 +18,8 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 // A RTSP server
 // Implementation
 
+#include <log.h>
+#include <string>
 #include "RTSPServer.hh"
 #include "RTSPCommon.hh"
 #include "RTSPRegisterSender.hh"
@@ -183,6 +185,7 @@ UserAuthenticationDatabase* RTSPServer::setAuthenticationDatabase(UserAuthentica
 }
 
 Boolean RTSPServer::setUpTunnelingOverHTTP(Port httpPort) {
+  LOGI("Tunneling RTSP over HTTP on port %s", std::to_string(httpServerPortNum()).c_str());
   fHTTPServerSocket = setUpOurSocket(envir(), httpPort);
   if (fHTTPServerSocket >= 0) {
     fHTTPServerPort = httpPort;

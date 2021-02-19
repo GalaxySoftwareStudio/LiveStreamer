@@ -7,3 +7,9 @@
 /build
 /captures
 .externalNativeBuild
+*.o
+*.d
+*.so
+/obj/*
+/obj/local/*
+/obj/local

@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "includePath": [
+                "D:/AndroidDevTools/NVPACK/android-ndk-r18b/sysroot/usr/include",
+                "D:/AndroidDevTools/NVPACK/android-ndk-r18b/sysroot/usr/include/GLES",
+                "D:/AndroidDevTools/NVPACK/android-ndk-r18b/sysroot/usr/include/GLES2",
+                "D:/AndroidDevTools/NVPACK/android-ndk-r18b/sysroot/usr/include/GLES3",
+                "D:/AndroidDevTools/NVPACK/android-ndk-r18b/sysroot/usr/include/arm-linux-androideabi",
+                "D:/AndroidDevTools/NVPACK/android-ndk-r18b/sysroot/usr/include/aarch64-linux-android",
+                "D:/AndroidDevTools/NVPACK/android-ndk-r18b/sysroot/usr/include/i686-linux-android"
+            ],
+            "defines": ["ANDROID", "__ANDROID__"],
+            "intelliSenseMode": "windows-msvc-x64",
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
